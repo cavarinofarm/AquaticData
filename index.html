@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cavarino Limited - Aquatic Data Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ocean-blue: #0277BD;
+            --ocean-blue-light: #039BE5;
+            --ocean-blue-dark: #01579B;
+            --garden-green: #388E3C;
+            --garden-green-light: #4CAF50;
+            --garden-green-dark: #2E7D32;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --medium-gray: #E0E0E0;
+            --dark-gray: #424242;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e3f2fd 100%);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0277BD 0%, #01579B 100%);
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header i {
+            font-size: 3rem;
+            color: var(--ocean-blue);
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: var(--ocean-blue-dark);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        /* Fixed input with icons styles - NO OVERLAP */
+        .input-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--ocean-blue);
+            font-size: 1rem;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-gray);
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: var(--transition);
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .password-toggle:hover {
+            color: var(--ocean-blue);
+        }
+
+        .password-toggle:focus {
+            outline: 2px solid var(--ocean-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.75rem;
+            padding-left: 45px !important;
+            padding-right: 50px !important;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--ocean-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(2, 119, 189, 0.1);
+        }
+
+        .input-wrapper input.error {
+            border-color: #d32f2f;
+        }
+
+        /* Remember me checkbox */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        /* Welcome message styles - Bottom right */
+        .welcome-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--garden-green);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-hover);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+            animation: slideInRight 0.5s ease;
+            max-width: 300px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .welcome-message i {
+            font-size: 1.5rem;
+            color: #FFD600;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-btn:focus {
+            outline: 3px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+            padding: 0.5rem;
+            background: #ffebee;
+            border-radius: 4px;
+        }
+
+        .success-message {
+            color: #2e7d32;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+            padding: 0.5rem;
+            background: #e8f5e9;
+            border-radius: 4px;
+        }
+
+        .loading-indicator {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .loading-indicator i {
+            color: var(--ocean-blue);
+            font-size: 1.5rem;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.5s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 0 0 auto;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #FFD600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 214, 0, 0.3);
+            transition: left 0.3s ease;
+        }
+
+        nav a:hover::before,
+        nav a:focus::before {
+            left: 0;
+        }
+
+        nav a:hover,
+        nav a:focus,
+        nav a.active {
+            color: #FFD600;
+        }
+
+        nav a:focus {
+            outline: 2px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-btn:focus {
+            outline: 2px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-toggle:focus {
+            outline: 2px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+            width: 100%;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, var(--white) 0%, #f9fbe7 100%);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease;
+            border-top: 4px solid var(--ocean-blue);
+            text-align: center;
+        }
+
+        .welcome-section h2 {
+            color: var(--ocean-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-section h2 i {
+            color: #FFD600;
+            flex-shrink: 0;
+        }
+
+        .welcome-section p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+        }
+
+        /* Main Category Cards */
+        .category-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, var(--white) 0%, #fafafa 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            border-top: 4px solid var(--ocean-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .category-card:hover,
+        .category-card:focus {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .category-card:focus {
+            outline: 3px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        .category-card i {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ocean-blue);
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: var(--ocean-blue-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+
+        /* Category-specific colors */
+        .category-card.water {
+            border-top-color: var(--ocean-blue);
+        }
+
+        .category-card.water i {
+            color: var(--ocean-blue);
+        }
+
+        .category-card.water h3 {
+            color: var(--ocean-blue-dark);
+        }
+
+        .category-card.production {
+            border-top-color: var(--garden-green);
+        }
+
+        .category-card.production i {
+            color: var(--garden-green);
+        }
+
+        .category-card.production h3 {
+            color: var(--garden-green-dark);
+        }
+
+        /* Sub-category Section */
+        .sub-category-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .sub-category-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--ocean-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--light-gray);
+            flex-wrap: wrap;
+        }
+
+        .section-title i {
+            color: #FFD600;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+
+        .section-title span {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .back-btn {
+            background: var(--medium-gray);
+            color: var(--dark-gray);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .back-btn:focus {
+            outline: 3px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--white) 0%, #fafafa 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--ocean-blue);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,214,0,0.1) 0%, transparent 70%);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            transform: translate(50%, 50%);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+            color: #FFD600;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--ocean-blue-dark);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-description {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-button {
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: auto;
+            overflow: hidden;
+        }
+
+        .card-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .card-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .card-button:focus {
+            outline: 3px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        .card-button i {
+            font-size: 1rem;
+        }
+
+        /* Production card styles */
+        .card.production {
+            border-left-color: var(--garden-green);
+        }
+
+        .card.production .card-icon {
+            background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);
+        }
+
+        .card.production .card-title {
+            color: var(--garden-green-dark);
+        }
+
+        .card.production .card-button {
+            background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);
+        }
+
+        /* Form Section */
+        .form-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--ocean-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(2, 119, 189, 0.1);
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #d32f2f;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+            color: var(--white);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: var(--medium-gray);
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn:focus {
+            outline: 3px solid #FFD600;
+            outline-offset: 2px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--ocean-blue-dark) 0%, #0d2818 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+        }
+
+        footer p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--ocean-blue);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+            max-width: 300px;
+        }
+
+        .toast.success {
+            background: var(--garden-green);
+        }
+
+        .toast.error {
+            background: #d32f2f;
+        }
+
+        .toast.info {
+            background: var(--ocean-blue);
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-overlay .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #FFD600;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .category-cards {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-blue-dark) 100%);
+                border-radius: 0 0 12px 12px;
+                padding: 0;
+                box-shadow: var(--shadow);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                width: 100%;
+            }
+
+            nav.active {
+                max-height: 400px;
+                padding: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a,
+            .logout-btn {
+                display: flex;
+                padding: 0.8rem 1rem;
+                text-align: center;
+                justify-content: center;
+                border-radius: 8px;
+                width: 100%;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .welcome-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-message {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo i {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .card-button {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-tractor"></i>
+                <h1>Cavarino Limited</h1>
+                <p>Aquatic Data Management</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" required placeholder="Enter username" autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" required placeholder="Enter password" autocomplete="current-password">
+                        <button type="button" class="password-toggle" id="passwordToggle" tabindex="-1">
+                            <i class="fas fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <button type="submit" class="login-btn" id="loginButton">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message">Login successful!</div>
+                <div id="loadingIndicator" class="loading-indicator">
+                    <i class="fas fa-spinner"></i> Verifying credentials...
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Welcome Message - Bottom Right -->
+    <div id="welcomeMessage" class="welcome-message">
+        <i class="fas fa-check-circle"></i>
+        <span id="welcomeText"></span>
+    </div>
+
+    <!-- Main Application (Hidden Initially) -->
+    <div id="mainApp" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fas fa-tractor"></i>
+                        <h1>Cavarino Limited</h1>
+                    </div>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="#" class="nav-link active" data-page="dashboard">Dashboard</a></li>
+                            <li><a href="#" class="nav-link" data-page="reports">Reports</a></li>
+                            <li>
+                                <button class="logout-btn" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="welcome-section">
+                    <h2>
+                        <i class="fas fa-fish"></i>
+                        <span>Aquatic Data Management</span>
+                    </h2>
+                    <p>Welcome to Cavarino Limited's aquatic data management system. Track and manage all your fish data efficiently. Select a category below to view and update records.</p>
+                    
+                    <div class="category-cards">
+                        <div class="category-card water" data-category="water" tabindex="0">
+                            <i class="fas fa-tint"></i>
+                            <h3>Water Quality</h3>
+                            <p>Monitor water quality parameters across different tanks and locations</p>
+                        </div>
+                        <div class="category-card production" data-category="production" tabindex="0">
+                            <i class="fas fa-fish"></i>
+                            <h3>Production</h3>
+                            <p>Track fish production data for different species</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Water Quality Sub-category Section -->
+                <section class="sub-category-section" id="water-subcategory">
+                    <button class="back-btn" onclick="showSection('dashboardSection')">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                    <h2 class="section-title">
+                        <i class="fas fa-tint"></i>
+                        <span>Water Quality Management</span>
+                    </h2>
+                    <div class="cards-grid">
+                        <div class="card water">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-egg"></i>
+                                </div>
+                                <h3 class="card-title">Hatchery</h3>
+                            </div>
+                            <p class="card-description">Monitor and record water quality parameters in hatchery area.</p>
+                            <button class="card-button" onclick="openForm('hatchery')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+
+                        <div class="card water">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-swimming-pool"></i>
+                                </div>
+                                <h3 class="card-title">Raise Tank</h3>
+                            </div>
+                            <p class="card-description">Track water quality parameters in raising tanks.</p>
+                            <button class="card-button" onclick="openForm('raiseTank')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+
+                        <div class="card water">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-water"></i>
+                                </div>
+                                <h3 class="card-title">Blue Tank</h3>
+                            </div>
+                            <p class="card-description">Monitor water quality parameters in blue tank.</p>
+                            <button class="card-button" onclick="openForm('blueTank')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+
+                        <div class="card water">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3 class="card-title">Grow-outs</h3>
+                            </div>
+                            <p class="card-description">Track water quality parameters in grow-out ponds.</p>
+                            <button class="card-button" onclick="openForm('growOuts')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Production Sub-category Section -->
+                <section class="sub-category-section" id="production-subcategory">
+                    <button class="back-btn" onclick="showSection('dashboardSection')">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
+                        <span>Production Management</span>
+                    </h2>
+                    <div class="cards-grid">
+                        <div class="card production">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-fish"></i>
+                                </div>
+                                <h3 class="card-title">Catfish</h3>
+                            </div>
+                            <p class="card-description">Track catfish production metrics including breeding and hatching data.</p>
+                            <button class="card-button" onclick="openForm('catfish')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+
+                        <div class="card production">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-fish"></i>
+                                </div>
+                                <h3 class="card-title">Tilapia</h3>
+                            </div>
+                            <p class="card-description">Monitor tilapia production metrics including stocking and harvesting.</p>
+                            <button class="card-button" onclick="openForm('tilapia')">
+                                <i class="fas fa-edit"></i> Update Data
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Water Quality Forms -->
+                <section class="form-section" id="hatchery-form">
+                    <button class="back-btn" onclick="showSection('water-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Water Quality
+                    </button>
+                    <h2 class="section-title">
+                        <i class="fas fa-egg"></i>
+                        <span>Hatchery Water Quality Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="hatcheryForm" onsubmit="submitForm(event, 'hatchery')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hatcheryDate">Date</label>
+                                    <input type="date" id="hatcheryDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hatcheryPh">Water pH (1-14)</label>
+                                    <input type="number" id="hatcheryPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hatcheryTemp">Water Temperature (°C)</label>
+                                    <input type="number" id="hatcheryTemp" name="temperature" step="0.1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hatcheryOxygen">Dissolved Oxygen (mg/L)</label>
+                                    <input type="number" id="hatcheryOxygen" name="oxygen" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hatcheryTurbidity">Turbidity (cm)</label>
+                                    <input type="number" id="hatcheryTurbidity" name="turbidity" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('water-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="form-section" id="raiseTank-form">
+                    <button class="back-btn" onclick="showSection('water-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Water Quality
+                    </button>
+                    <h2 class="section-title">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Raise Tank Water Quality Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="raiseTankForm" onsubmit="submitForm(event, 'raiseTank')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="raiseTankDate">Date</label>
+                                    <input type="date" id="raiseTankDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="raiseTankPh">Water pH (1-14)</label>
+                                    <input type="number" id="raiseTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="raiseTankTemp">Water Temperature (°C)</label>
+                                    <input type="number" id="raiseTankTemp" name="temperature" step="0.1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="raiseTankOxygen">Dissolved Oxygen (mg/L)</label>
+                                    <input type="number" id="raiseTankOxygen" name="oxygen" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="raiseTankTurbidity">Turbidity (cm)</label>
+                                    <input type="number" id="raiseTankTurbidity" name="turbidity" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('water-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="form-section" id="blueTank-form">
+                    <button class="back-btn" onclick="showSection('water-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Water Quality
+                    </button>
+                    <h2 class="section-title">
+                        <i class="fas fa-water"></i>
+                        <span>Blue Tank Water Quality Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="blueTankForm" onsubmit="submitForm(event, 'blueTank')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="blueTankDate">Date</label>
+                                    <input type="date" id="blueTankDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="blueTankPh">Water pH (1-14)</label>
+                                    <input type="number" id="blueTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="blueTankTemp">Water Temperature (°C)</label>
+                                    <input type="number" id="blueTankTemp" name="temperature" step="0.1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="blueTankOxygen">Dissolved Oxygen (mg/L)</label>
+                                    <input type="number" id="blueTankOxygen" name="oxygen" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="blueTankTurbidity">Turbidity (cm)</label>
+                                    <input type="number" id="blueTankTurbidity" name="turbidity" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('water-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="form-section" id="growOuts-form">
+                    <button class="back-btn" onclick="showSection('water-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Water Quality
+                    </button>
+                    <h2 class="section-title">
+                        <i class="fas fa-seedling"></i>
+                        <span>Grow-outs Water Quality Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="growOutsForm" onsubmit="submitForm(event, 'growOuts')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="growOutsDate">Date</label>
+                                    <input type="date" id="growOutsDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="growOutsPh">Water pH (1-14)</label>
+                                    <input type="number" id="growOutsPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="growOutsTemp">Water Temperature (°C)</label>
+                                    <input type="number" id="growOutsTemp" name="temperature" step="0.1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="growOutsOxygen">Dissolved Oxygen (mg/L)</label>
+                                    <input type="number" id="growOutsOxygen" name="oxygen" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="growOutsTurbidity">Turbidity (cm)</label>
+                                    <input type="number" id="growOutsTurbidity" name="turbidity" step="0.1" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('water-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Production Forms -->
+                <section class="form-section" id="catfish-form">
+                    <button class="back-btn" onclick="showSection('production-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Production
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
+                        <span>Catfish Production Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="catfishForm" onsubmit="submitForm(event, 'catfish')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="catfishInducingDate">Inducing Date</label>
+                                    <input type="date" id="catfishInducingDate" name="inducingDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="catfishBroodingFemales">Brooding Females</label>
+                                    <input type="number" id="catfishBroodingFemales" name="broodingFemales" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="catfishStrippingDate">Stripping Date</label>
+                                    <input type="date" id="catfishStrippingDate" name="strippingDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="catfishMalesSacrificed">Males Sacrificed</label>
+                                    <input type="number" id="catfishMalesSacrificed" name="malesSacrificed" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="catfishEggs">Eggs (grams)</label>
+                                    <input type="number" id="catfishEggs" name="eggs" step="0.1" required oninput="calculateCatfishValues()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="catfishActualHatching">Actual Hatching %</label>
+                                    <input type="number" id="catfishActualHatching" name="actualHatching" step="0.1" min="0" max="100" required oninput="calculateCatfishValues()">
+                                </div>
+                            </div>
+                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <div class="form-group">
+                                    <label style="color: var(--garden-green-dark);">Expected Hatchlings (Auto-calculated)</label>
+                                    <input type="number" id="catfishExpectedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: var(--garden-green-dark);">Estimated Hatchlings (Auto-calculated)</label>
+                                    <input type="number" id="catfishEstimatedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('production-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="form-section" id="tilapia-form">
+                    <button class="back-btn" onclick="showSection('production-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Production
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
+                        <span>Tilapia Production Data</span>
+                    </h2>
+                    <div class="form-container">
+                        <form id="tilapiaForm" onsubmit="submitForm(event, 'tilapia')">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tilapiaDate">Date</label>
+                                    <input type="date" id="tilapiaDate" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tilapiaTankNumber">Tank Number</label>
+                                    <input type="text" id="tilapiaTankNumber" name="tankNumber" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tilapiaBroodingFemales">Brooding Females</label>
+                                    <input type="number" id="tilapiaBroodingFemales" name="broodingFemales" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tilapiaFrysHarvestedGrams">Frys Harvested (grams)</label>
+                                    <input type="number" id="tilapiaFrysHarvestedGrams" name="frysHarvestedGrams" step="0.1" required oninput="calculateTilapiaValues()">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tilapiaEggs">Eggs (grams)</label>
+                                    <input type="number" id="tilapiaEggs" name="eggs" step="0.1" required oninput="calculateTilapiaValues()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tilapiaActualHatching">Actual Hatching %</label>
+                                    <input type="number" id="tilapiaActualHatching" name="actualHatching" step="0.1" min="0" max="100" required oninput="calculateTilapiaValues()">
+                                </div>
+                            </div>
+                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <div class="form-group">
+                                    <label style="color: var(--garden-green-dark);">Frys Harvested Count (Auto-calculated)</label>
+                                    <input type="number" id="tilapiaFrysHarvestedCount" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: var(--garden-green-dark);">Expected Hatchlings (Auto-calculated)</label>
+                                    <input type="number" id="tilapiaExpectedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                                </div>
+                            </div>
+                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <label style="color: var(--garden-green-dark);">Total Production (Auto-calculated)</label>
+                                    <input type="number" id="tilapiaTotalProduction" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('production-subcategory')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>
+                    <i class="fas fa-copyright"></i> 
+                    2025 Cavarino Limited. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu-td1NSfmdjg9voY4qU8tIXx-rwqZS0ltQS7wFh-we6AYluLMIwROWTpgmR7L0jSyFA/exec';
+
+        // Inactivity timer variables
+        let inactivityTimer;
+        let lastActivityTime = Date.now();
+        const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+
+        // Function to reset inactivity timer
+        function resetInactivityTimer() {
+            lastActivityTime = Date.now();
+            clearTimeout(inactivityTimer);
+            
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                inactivityTimer = setTimeout(() => {
+                    showToast('Session expired due to inactivity', 'error');
+                    logout();
+                }, INACTIVITY_TIMEOUT);
+            }
+        }
+
+        // Function to logout
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            clearTimeout(inactivityTimer);
+            
+            document.getElementById('loginSection').style.display = 'flex';
+            document.getElementById('mainApp').style.display = 'none';
+            
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            passwordInput.setAttribute('type', 'password');
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+
+        // Function to show welcome message
+        function showWelcomeMessage(username) {
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const welcomeText = document.getElementById('welcomeText');
+            
+            welcomeText.textContent = `Welcome ${username}!`;
+            welcomeMessage.style.display = 'flex';
+            
+            setTimeout(() => {
+                welcomeMessage.style.display = 'none';
+            }, 4000);
+        }
+
+        // Add activity listeners
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer, true);
+        });
+
+        // Function to save credentials
+        function saveCredentials(username, password, remember) {
+            if (remember) {
+                localStorage.setItem('savedUsername', username);
+                localStorage.setItem('savedPassword', password);
+                localStorage.setItem('rememberMe', 'true');
+            } else {
+                localStorage.removeItem('savedUsername');
+                localStorage.removeItem('savedPassword');
+                localStorage.removeItem('rememberMe');
+            }
+        }
+
+        // Function to load saved credentials
+        function loadSavedCredentials() {
+            const rememberMe = localStorage.getItem('rememberMe') === 'true';
+            if (rememberMe) {
+                const savedUsername = localStorage.getItem('savedUsername');
+                const savedPassword = localStorage.getItem('savedPassword');
+                
+                if (savedUsername && savedPassword) {
+                    document.getElementById('username').value = savedUsername;
+                    document.getElementById('password').value = savedPassword;
+                    document.getElementById('rememberMe').checked = true;
+                }
+            }
+        }
+
+        // Function to authenticate user
+        async function authenticateUser(username, password) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        type: 'login',
+                        username: username,
+                        password: password
+                    })
+                });
+
+                const text = await response.text();
+                
+                try {
+                    const result = JSON.parse(text);
+                    return result;
+                } catch (e) {
+                    if (text.includes('authenticated') && text.includes('true')) {
+                        return { authenticated: true, status: 'success' };
+                    }
+                    return { authenticated: false, status: 'error', message: 'Invalid response' };
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                return { 
+                    authenticated: false, 
+                    status: 'error', 
+                    message: 'Connection failed: ' + error.message 
+                };
+            }
+        }
+
+        // Function to send data to Google Sheets
+        async function saveToGoogleSheets(dataType, formData) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify({
+                        type: dataType,
+                        ...formData
+                    })
+                });
+
+                return { success: true };
+            } catch (error) {
+                console.error('Error saving to Google Sheets:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icon = document.createElement('i');
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                             type === 'error' ? 'fas fa-exclamation-circle' : 
+                             'fas fa-info-circle';
+            
+            const text = document.createElement('span');
+            text.textContent = message;
+            
+            toast.appendChild(icon);
+            toast.appendChild(text);
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        // Function to calculate catfish values
+        function calculateCatfishValues() {
+            const eggs = parseFloat(document.getElementById('catfishEggs').value) || 0;
+            const hatchingPercent = parseFloat(document.getElementById('catfishActualHatching').value) || 0;
+            
+            const expectedHatchlings = eggs * 70;
+            document.getElementById('catfishExpectedHatchlings').value = expectedHatchlings.toFixed(0);
+            
+            const estimatedHatchlings = (hatchingPercent / 100) * expectedHatchlings;
+            document.getElementById('catfishEstimatedHatchlings').value = estimatedHatchlings.toFixed(0);
+        }
+
+        // Function to calculate tilapia values
+        function calculateTilapiaValues() {
+            const frysGrams = parseFloat(document.getElementById('tilapiaFrysHarvestedGrams').value) || 0;
+            const eggs = parseFloat(document.getElementById('tilapiaEggs').value) || 0;
+            const hatchingPercent = parseFloat(document.getElementById('tilapiaActualHatching').value) || 0;
+            
+            const frysCount = frysGrams * 20;
+            document.getElementById('tilapiaFrysHarvestedCount').value = frysCount.toFixed(0);
+            
+            const expectedHatchlings = eggs * 50;
+            document.getElementById('tilapiaExpectedHatchlings').value = expectedHatchlings.toFixed(0);
+            
+            const totalProduction = (0.9 * frysCount) + ((hatchingPercent / 100) * expectedHatchlings);
+            document.getElementById('tilapiaTotalProduction').value = totalProduction.toFixed(0);
+        }
+
+        // Main application logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginSection = document.getElementById('loginSection');
+            const mainApp = document.getElementById('mainApp');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const loginButton = document.getElementById('loginButton');
+            
+            // Load saved credentials
+            loadSavedCredentials();
+            
+            // Password toggle
+            document.getElementById('passwordToggle').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const toggleIcon = document.getElementById('toggleIcon');
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                if (type === 'text') {
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            });
+            
+            // Check for saved session
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                loginSection.style.display = 'none';
+                mainApp.style.display = 'block';
+                resetInactivityTimer();
+            }
+            
+            // Login form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+                
+                if (!username || !password) {
+                    errorMessage.textContent = 'Please enter both username and password.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+                
+                loadingIndicator.style.display = 'block';
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                loginButton.disabled = true;
+                
+                try {
+                    const authResult = await authenticateUser(username, password);
+                    
+                    if (authResult.authenticated) {
+                        saveCredentials(username, password, rememberMe);
+                        
+                        successMessage.style.display = 'block';
+                        sessionStorage.setItem('isLoggedIn', 'true');
+                        sessionStorage.setItem('username', username);
+                        
+                        setTimeout(() => {
+                            loginSection.style.display = 'none';
+                            mainApp.style.display = 'block';
+                            loginForm.reset();
+                            successMessage.style.display = 'none';
+                            
+                            showWelcomeMessage(username);
+                            resetInactivityTimer();
+                            
+                            const passwordInput = document.getElementById('password');
+                            const toggleIcon = document.getElementById('toggleIcon');
+                            passwordInput.setAttribute('type', 'password');
+                            toggleIcon.classList.remove('fa-eye-slash');
+                            toggleIcon.classList.add('fa-eye');
+                        }, 1000);
+                    } else {
+                        errorMessage.textContent = authResult.message || 'Invalid username or password';
+                        errorMessage.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            errorMessage.style.display = 'none';
+                        }, 4000);
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    errorMessage.textContent = 'Login failed. Please try again.';
+                    errorMessage.style.display = 'block';
+                }
+                
+                loadingIndicator.style.display = 'none';
+                loginButton.disabled = false;
+            });
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                logout();
+            });
+
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+
+            // Category card selection
+            const categoryCards = document.querySelectorAll('.category-card');
+            const subCategorySections = document.querySelectorAll('.sub-category-section');
+            const formSections = document.querySelectorAll('.form-section');
+            const dashboardSection = document.getElementById('dashboardSection');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryType = this.getAttribute('data-category');
+                    const targetSection = document.getElementById(`${categoryType}-subcategory`);
+                    
+                    dashboardSection.style.display = 'none';
+                    
+                    subCategorySections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    formSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Form opening function
+            window.openForm = function(formType) {
+                const targetForm = document.getElementById(`${formType}-form`);
+                
+                dashboardSection.style.display = 'none';
+                subCategorySections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                formSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                if (targetForm) {
+                    targetForm.style.display = 'block';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+
+            // Show section function
+            window.showSection = function(sectionId) {
+                dashboardSection.style.display = 'none';
+                subCategorySections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                formSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                if (sectionId === 'dashboardSection') {
+                    dashboardSection.style.display = 'block';
+                } else {
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            };
+
+            // Form submission handler
+            window.submitForm = async function(event, formType) {
+                event.preventDefault();
+                
+                const form = event.target;
+                const inputs = form.querySelectorAll('input[required]');
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('error');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('error');
+                    }
+                    
+                    if (input.name === 'ph') {
+                        const phValue = parseFloat(input.value);
+                        if (isNaN(phValue) || phValue < 1 || phValue > 14) {
+                            input.classList.add('error');
+                            isValid = false;
+                        }
+                    }
+                    
+                    if (input.name === 'actualHatching') {
+                        const percentValue = parseFloat(input.value);
+                        if (isNaN(percentValue) || percentValue < 0 || percentValue > 100) {
+                            input.classList.add('error');
+                            isValid = false;
+                        }
+                    }
+                });
+                
+                if (!isValid) {
+                    showToast('Please fill in all required fields correctly.', 'error');
+                    return;
+                }
+                
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.classList.add('active');
+                
+                let dataType;
+                if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
+                    dataType = 'water_quality';
+                    data.habitat = formType.charAt(0).toUpperCase() + formType.slice(1);
+                    if (formType === 'raiseTank') data.habitat = 'Raise Tank';
+                    if (formType === 'blueTank') data.habitat = 'Blue Tank';
+                    if (formType === 'growOuts') data.habitat = 'Grow-outs';
+                } else if (formType === 'catfish') {
+                    dataType = 'production_catfish';
+                } else if (formType === 'tilapia') {
+                    dataType = 'production_tilapia';
+                }
+                
+                const result = await saveToGoogleSheets(dataType, data);
+                
+                loadingOverlay.classList.remove('active');
+                
+                if (result.success) {
+                    showToast('Data saved successfully!', 'success');
+                    
+                    form.reset();
+                    
+                    const today = new Date().toISOString().split('T')[0];
+                    form.querySelectorAll('input[type="date"]').forEach(input => {
+                        input.value = today;
+                    });
+                    
+                    let targetSection;
+                    if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
+                        targetSection = 'water-subcategory';
+                    } else if (['catfish', 'tilapia'].includes(formType)) {
+                        targetSection = 'production-subcategory';
+                    }
+                    
+                    setTimeout(() => {
+                        showSection(targetSection);
+                    }, 1000);
+                } else {
+                    showToast('Error saving data. Please try again.', 'error');
+                }
+            };
+
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.value = today;
+            });
+        });
+    </script>
+</body>
+</html>
