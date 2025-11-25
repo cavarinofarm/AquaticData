@@ -1294,7 +1294,7 @@
                     </div>
                 </section>
 
-                <!-- Water Quality Forms -->
+                <!-- Water Quality Forms - UPDATED WITH TANK NUMBER -->
                 <section class="form-section" id="hatchery-form">
                     <button class="back-btn" onclick="showSection('water-subcategory')">
                         <i class="fas fa-arrow-left"></i> Back to Water Quality
@@ -1311,21 +1311,25 @@
                                     <input type="date" id="hatcheryDate" name="date" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="hatcheryPh">Water pH (1-14)</label>
-                                    <input type="number" id="hatcheryPh" name="ph" min="1" max="14" step="0.1" required>
+                                    <label for="hatcheryTankNumber">Tank No.</label>
+                                    <input type="text" id="hatcheryTankNumber" name="tankNumber" required placeholder="Enter tank number">
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hatcheryPh">Water pH (1-14)</label>
+                                    <input type="number" id="hatcheryPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
                                 <div class="form-group">
                                     <label for="hatcheryTemp">Water Temperature (°C)</label>
                                     <input type="number" id="hatcheryTemp" name="temperature" step="0.1" required>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="hatcheryOxygen">Dissolved Oxygen (mg/L)</label>
                                     <input type="number" id="hatcheryOxygen" name="oxygen" step="0.1" required>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="hatcheryTurbidity">Turbidity (cm)</label>
                                     <input type="number" id="hatcheryTurbidity" name="turbidity" step="0.1" required>
@@ -1359,21 +1363,25 @@
                                     <input type="date" id="raiseTankDate" name="date" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="raiseTankPh">Water pH (1-14)</label>
-                                    <input type="number" id="raiseTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                    <label for="raiseTankTankNumber">Tank No.</label>
+                                    <input type="text" id="raiseTankTankNumber" name="tankNumber" required placeholder="Enter tank number">
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label for="raiseTankPh">Water pH (1-14)</label>
+                                    <input type="number" id="raiseTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
                                 <div class="form-group">
                                     <label for="raiseTankTemp">Water Temperature (°C)</label>
                                     <input type="number" id="raiseTankTemp" name="temperature" step="0.1" required>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="raiseTankOxygen">Dissolved Oxygen (mg/L)</label>
                                     <input type="number" id="raiseTankOxygen" name="oxygen" step="0.1" required>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="raiseTankTurbidity">Turbidity (cm)</label>
                                     <input type="number" id="raiseTankTurbidity" name="turbidity" step="0.1" required>
@@ -1407,21 +1415,25 @@
                                     <input type="date" id="blueTankDate" name="date" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="blueTankPh">Water pH (1-14)</label>
-                                    <input type="number" id="blueTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                    <label for="blueTankTankNumber">Tank No.</label>
+                                    <input type="text" id="blueTankTankNumber" name="tankNumber" required placeholder="Enter tank number">
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label for="blueTankPh">Water pH (1-14)</label>
+                                    <input type="number" id="blueTankPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
                                 <div class="form-group">
                                     <label for="blueTankTemp">Water Temperature (°C)</label>
                                     <input type="number" id="blueTankTemp" name="temperature" step="0.1" required>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="blueTankOxygen">Dissolved Oxygen (mg/L)</label>
                                     <input type="number" id="blueTankOxygen" name="oxygen" step="0.1" required>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="blueTankTurbidity">Turbidity (cm)</label>
                                     <input type="number" id="blueTankTurbidity" name="turbidity" step="0.1" required>
@@ -1455,21 +1467,25 @@
                                     <input type="date" id="growOutsDate" name="date" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="growOutsPh">Water pH (1-14)</label>
-                                    <input type="number" id="growOutsPh" name="ph" min="1" max="14" step="0.1" required>
+                                    <label for="growOutsTankNumber">Tank No.</label>
+                                    <input type="text" id="growOutsTankNumber" name="tankNumber" required placeholder="Enter tank number">
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label for="growOutsPh">Water pH (1-14)</label>
+                                    <input type="number" id="growOutsPh" name="ph" min="1" max="14" step="0.1" required>
+                                </div>
                                 <div class="form-group">
                                     <label for="growOutsTemp">Water Temperature (°C)</label>
                                     <input type="number" id="growOutsTemp" name="temperature" step="0.1" required>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="growOutsOxygen">Dissolved Oxygen (mg/L)</label>
                                     <input type="number" id="growOutsOxygen" name="oxygen" step="0.1" required>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="form-group">
                                     <label for="growOutsTurbidity">Turbidity (cm)</label>
                                     <input type="number" id="growOutsTurbidity" name="turbidity" step="0.1" required>
