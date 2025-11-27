@@ -98,7 +98,6 @@
             font-weight: 500;
         }
 
-        /* Fixed input with icons styles - NO OVERLAP */
         .input-wrapper {
             position: relative;
             display: block;
@@ -163,7 +162,6 @@
             border-color: #d32f2f;
         }
 
-        /* Remember me checkbox */
         .remember-me {
             display: flex;
             align-items: center;
@@ -184,7 +182,6 @@
             font-size: 0.9rem;
         }
 
-        /* Welcome message styles - Bottom right */
         .welcome-message {
             position: fixed;
             bottom: 20px;
@@ -412,7 +409,6 @@
             outline-offset: 2px;
         }
 
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -527,7 +523,6 @@
             font-size: 1rem;
         }
 
-        /* Category-specific colors */
         .category-card.water {
             border-top-color: var(--ocean-blue);
         }
@@ -751,6 +746,47 @@
             background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);
         }
 
+        /* Action cards for production species */
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, var(--white) 0%, #fafafa 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            border-top: 4px solid var(--garden-green);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .action-card i {
+            font-size: 3rem;
+            color: var(--garden-green);
+            margin-bottom: 1rem;
+        }
+
+        .action-card h4 {
+            font-size: 1.3rem;
+            color: var(--garden-green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
         /* Form Section */
         .form-section {
             background-color: var(--white);
@@ -845,6 +881,16 @@
             color: var(--white);
         }
 
+        .btn-danger {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: var(--white);
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -853,6 +899,238 @@
         .btn:focus {
             outline: 3px solid #FFD600;
             outline-offset: 2px;
+        }
+
+        /* Records Table Styles */
+        .records-section {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .records-section.active {
+            display: block;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--ocean-blue);
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 0.8rem 1.5rem;
+            background: var(--ocean-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-bar button:hover {
+            background: var(--ocean-blue-dark);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        .records-table th,
+        .records-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .records-table th {
+            background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);
+            color: var(--white);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .records-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .records-table td {
+            vertical-align: middle;
+        }
+
+        .records-table .date-cell {
+            white-space: nowrap;
+        }
+
+        .records-table .actions {
+            display: flex;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .records-table .btn-edit {
+            background: var(--ocean-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .records-table .btn-edit:hover {
+            background: var(--ocean-blue-dark);
+        }
+
+        .records-table .btn-delete {
+            background: #d32f2f;
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .records-table .btn-delete:hover {
+            background: #b71c1c;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 3rem;
+            color: var(--dark-gray);
+        }
+
+        .no-records i {
+            font-size: 3rem;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--medium-gray);
+        }
+
+        .modal-header h3 {
+            color: var(--garden-green-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+            padding: 0.5rem;
+        }
+
+        .modal-close:hover {
+            color: #d32f2f;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Status indicators */
+        .status-pending {
+            background: #fff3e0;
+            color: #e65100;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-complete {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
         /* Footer */
@@ -872,7 +1150,7 @@
             gap: 10px;
         }
 
-        /* Notification Toast */
+        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -1049,6 +1327,15 @@
                 left: 10px;
                 max-width: none;
             }
+
+            .records-table {
+                font-size: 0.9rem;
+            }
+
+            .records-table th,
+            .records-table td {
+                padding: 0.75rem 0.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1135,13 +1422,13 @@
         </div>
     </div>
 
-    <!-- Welcome Message - Bottom Right -->
+    <!-- Welcome Message -->
     <div id="welcomeMessage" class="welcome-message">
         <i class="fas fa-check-circle"></i>
         <span id="welcomeText"></span>
     </div>
 
-    <!-- Main Application (Hidden Initially) -->
+    <!-- Main Application -->
     <div id="mainApp" style="display: none;">
         <header>
             <div class="container">
@@ -1274,8 +1561,8 @@
                                 <h3 class="card-title">Catfish</h3>
                             </div>
                             <p class="card-description">Track catfish production metrics including breeding and hatching data.</p>
-                            <button class="card-button" onclick="openForm('catfish')">
-                                <i class="fas fa-edit"></i> Update Data
+                            <button class="card-button" onclick="openProductionOptions('catfish')">
+                                <i class="fas fa-arrow-right"></i> Manage
                             </button>
                         </div>
 
@@ -1287,14 +1574,60 @@
                                 <h3 class="card-title">Tilapia</h3>
                             </div>
                             <p class="card-description">Monitor tilapia production metrics including stocking and harvesting.</p>
-                            <button class="card-button" onclick="openForm('tilapia')">
-                                <i class="fas fa-edit"></i> Update Data
+                            <button class="card-button" onclick="openProductionOptions('tilapia')">
+                                <i class="fas fa-arrow-right"></i> Manage
                             </button>
                         </div>
                     </div>
                 </section>
 
-                <!-- Water Quality Forms - UPDATED WITH TANK NUMBER -->
+                <!-- Catfish Options Section -->
+                <section class="sub-category-section" id="catfish-options">
+                    <button class="back-btn" onclick="showSection('production-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Production
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
+                        <span>Catfish Production</span>
+                    </h2>
+                    <div class="action-cards">
+                        <div class="action-card" onclick="openForm('catfish')">
+                            <i class="fas fa-plus-circle"></i>
+                            <h4>Add Data</h4>
+                            <p>Add new catfish production record with breeding and hatching information</p>
+                        </div>
+                        <div class="action-card" onclick="openRecords('catfish')">
+                            <i class="fas fa-table"></i>
+                            <h4>View Records</h4>
+                            <p>View, edit, and manage all catfish production records</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tilapia Options Section -->
+                <section class="sub-category-section" id="tilapia-options">
+                    <button class="back-btn" onclick="showSection('production-subcategory')">
+                        <i class="fas fa-arrow-left"></i> Back to Production
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
+                        <span>Tilapia Production</span>
+                    </h2>
+                    <div class="action-cards">
+                        <div class="action-card" onclick="openForm('tilapia')">
+                            <i class="fas fa-plus-circle"></i>
+                            <h4>Add Data</h4>
+                            <p>Add new tilapia production record with harvesting information</p>
+                        </div>
+                        <div class="action-card" onclick="openRecords('tilapia')">
+                            <i class="fas fa-table"></i>
+                            <h4>View Records</h4>
+                            <p>View, edit, and manage all tilapia production records</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Water Quality Forms -->
                 <section class="form-section" id="hatchery-form">
                     <button class="back-btn" onclick="showSection('water-subcategory')">
                         <i class="fas fa-arrow-left"></i> Back to Water Quality
@@ -1503,25 +1836,25 @@
                     </div>
                 </section>
 
-                <!-- Production Forms -->
+                <!-- Catfish Add Data Form -->
                 <section class="form-section" id="catfish-form">
-                    <button class="back-btn" onclick="showSection('production-subcategory')">
-                        <i class="fas fa-arrow-left"></i> Back to Production
+                    <button class="back-btn" onclick="showSection('catfish-options')">
+                        <i class="fas fa-arrow-left"></i> Back to Catfish
                     </button>
                     <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
-                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
-                        <span>Catfish Production Data</span>
+                        <i class="fas fa-plus-circle" style="color: var(--garden-green-light);"></i>
+                        <span>Add Catfish Production Data</span>
                     </h2>
                     <div class="form-container">
                         <form id="catfishForm" onsubmit="submitForm(event, 'catfish')">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="catfishInducingDate">Inducing Date</label>
+                                    <label for="catfishInducingDate">Induction Date</label>
                                     <input type="date" id="catfishInducingDate" name="inducingDate" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="catfishBroodingFemales">Brooding Females</label>
-                                    <input type="number" id="catfishBroodingFemales" name="broodingFemales" required>
+                                    <input type="number" id="catfishBroodingFemales" name="broodingFemales" required min="0">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -1530,35 +1863,25 @@
                                     <input type="date" id="catfishStrippingDate" name="strippingDate" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="catfishMalesSacrificed">Males Sacrificed</label>
-                                    <input type="number" id="catfishMalesSacrificed" name="malesSacrificed" required>
+                                    <label for="catfishMalesSacrificed">Sacrificed Males</label>
+                                    <input type="number" id="catfishMalesSacrificed" name="malesSacrificed" required min="0">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="catfishEggs">Eggs (grams)</label>
-                                    <input type="number" id="catfishEggs" name="eggs" step="0.1" required oninput="calculateCatfishValues()">
+                                    <input type="number" id="catfishEggs" name="eggs" step="0.1" required min="0" oninput="calculateCatfishExpected()">
                                 </div>
-                                <div class="form-group">
-                                    <label for="catfishActualHatching">Actual Hatching %</label>
-                                    <input type="number" id="catfishActualHatching" name="actualHatching" step="0.1" min="0" max="100" required oninput="calculateCatfishValues()">
-                                </div>
-                            </div>
-                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
                                 <div class="form-group">
                                     <label style="color: var(--garden-green-dark);">Expected Hatchlings (Auto-calculated)</label>
                                     <input type="number" id="catfishExpectedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
                                 </div>
-                                <div class="form-group">
-                                    <label style="color: var(--garden-green-dark);">Estimated Hatchlings (Auto-calculated)</label>
-                                    <input type="number" id="catfishEstimatedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
-                                </div>
                             </div>
                             <div class="form-actions">
-                                <button type="button" class="btn btn-secondary" onclick="showSection('production-subcategory')">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('catfish-options')">
                                     <i class="fas fa-times"></i> Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);">
                                     <i class="fas fa-save"></i> Save Data
                                 </button>
                             </div>
@@ -1566,13 +1889,14 @@
                     </div>
                 </section>
 
+                <!-- Tilapia Add Data Form -->
                 <section class="form-section" id="tilapia-form">
-                    <button class="back-btn" onclick="showSection('production-subcategory')">
-                        <i class="fas fa-arrow-left"></i> Back to Production
+                    <button class="back-btn" onclick="showSection('tilapia-options')">
+                        <i class="fas fa-arrow-left"></i> Back to Tilapia
                     </button>
                     <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
-                        <i class="fas fa-fish" style="color: var(--garden-green-light);"></i>
-                        <span>Tilapia Production Data</span>
+                        <i class="fas fa-plus-circle" style="color: var(--garden-green-light);"></i>
+                        <span>Add Tilapia Production Data</span>
                     </h2>
                     <div class="form-container">
                         <form id="tilapiaForm" onsubmit="submitForm(event, 'tilapia')">
@@ -1589,48 +1913,130 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="tilapiaBroodingFemales">Brooding Females</label>
-                                    <input type="number" id="tilapiaBroodingFemales" name="broodingFemales" required>
+                                    <input type="number" id="tilapiaBroodingFemales" name="broodingFemales" required min="0">
                                 </div>
                                 <div class="form-group">
                                     <label for="tilapiaFrysHarvestedGrams">Frys Harvested (grams)</label>
-                                    <input type="number" id="tilapiaFrysHarvestedGrams" name="frysHarvestedGrams" step="0.1" required oninput="calculateTilapiaValues()">
+                                    <input type="number" id="tilapiaFrysHarvestedGrams" name="frysHarvestedGrams" step="0.1" required min="0" oninput="calculateTilapiaExpected()">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label for="tilapiaEggs">Eggs (grams)</label>
-                                    <input type="number" id="tilapiaEggs" name="eggs" step="0.1" required oninput="calculateTilapiaValues()">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tilapiaActualHatching">Actual Hatching %</label>
-                                    <input type="number" id="tilapiaActualHatching" name="actualHatching" step="0.1" min="0" max="100" required oninput="calculateTilapiaValues()">
-                                </div>
-                            </div>
-                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
                                 <div class="form-group">
                                     <label style="color: var(--garden-green-dark);">Frys Harvested Count (Auto-calculated)</label>
                                     <input type="number" id="tilapiaFrysHarvestedCount" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
                                 </div>
                                 <div class="form-group">
+                                    <label for="tilapiaEggs">Eggs (grams)</label>
+                                    <input type="number" id="tilapiaEggs" name="eggs" step="0.1" required min="0" oninput="calculateTilapiaExpected()">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
                                     <label style="color: var(--garden-green-dark);">Expected Hatchlings (Auto-calculated)</label>
                                     <input type="number" id="tilapiaExpectedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
                                 </div>
                             </div>
-                            <div class="form-row" style="background-color: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div class="form-group" style="grid-column: 1 / -1;">
-                                    <label style="color: var(--garden-green-dark);">Total Production (Auto-calculated)</label>
-                                    <input type="number" id="tilapiaTotalProduction" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
-                                </div>
-                            </div>
                             <div class="form-actions">
-                                <button type="button" class="btn btn-secondary" onclick="showSection('production-subcategory')">
+                                <button type="button" class="btn btn-secondary" onclick="showSection('tilapia-options')">
                                     <i class="fas fa-times"></i> Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);">
                                     <i class="fas fa-save"></i> Save Data
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </section>
+
+                <!-- Catfish Records Section -->
+                <section class="records-section" id="catfish-records">
+                    <button class="back-btn" onclick="showSection('catfish-options')">
+                        <i class="fas fa-arrow-left"></i> Back to Catfish
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-table" style="color: var(--garden-green-light);"></i>
+                        <span>Catfish Production Records</span>
+                    </h2>
+                    <div class="search-bar">
+                        <input type="text" id="catfishSearch" placeholder="Search by Record ID (e.g., CP#1)">
+                        <button onclick="searchRecords('catfish')">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button onclick="loadCatfishRecords()" style="background: var(--garden-green);">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="records-table" id="catfishTable">
+                            <thead>
+                                <tr>
+                                    <th>Record ID</th>
+                                    <th>Induction Date</th>
+                                    <th>Brooding Females</th>
+                                    <th>Stripping Date</th>
+                                    <th>Sacrificed Males</th>
+                                    <th>Eggs (g)</th>
+                                    <th>Expected Hatchlings</th>
+                                    <th>Actual Hatching %</th>
+                                    <th>Estimated Hatchlings</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catfishTableBody">
+                                <!-- Records will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="no-records" id="catfishNoRecords" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <p>No records found</p>
+                    </div>
+                </section>
+
+                <!-- Tilapia Records Section -->
+                <section class="records-section" id="tilapia-records">
+                    <button class="back-btn" onclick="showSection('tilapia-options')">
+                        <i class="fas fa-arrow-left"></i> Back to Tilapia
+                    </button>
+                    <h2 class="section-title" style="color: var(--garden-green); border-bottom-color: var(--garden-green-light);">
+                        <i class="fas fa-table" style="color: var(--garden-green-light);"></i>
+                        <span>Tilapia Production Records</span>
+                    </h2>
+                    <div class="search-bar">
+                        <input type="text" id="tilapiaSearch" placeholder="Search by Record ID (e.g., TP#1)">
+                        <button onclick="searchRecords('tilapia')">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button onclick="loadTilapiaRecords()" style="background: var(--garden-green);">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="records-table" id="tilapiaTable">
+                            <thead>
+                                <tr>
+                                    <th>Record ID</th>
+                                    <th>Date</th>
+                                    <th>Tank Number</th>
+                                    <th>Brooding Females</th>
+                                    <th>Frys Harvested</th>
+                                    <th>Eggs (g)</th>
+                                    <th>Expected Hatchlings</th>
+                                    <th>Hatching %</th>
+                                    <th>Total Production</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tilapiaTableBody">
+                                <!-- Records will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="no-records" id="tilapiaNoRecords" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <p>No records found</p>
                     </div>
                 </section>
             </div>
@@ -1646,6 +2052,114 @@
         </footer>
     </div>
 
+    <!-- Edit Catfish Modal -->
+    <div class="modal" id="editCatfishModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Update Catfish Record</h3>
+                <button class="modal-close" onclick="closeModal('editCatfishModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editCatfishForm">
+                    <input type="hidden" id="editCatfishRecordId">
+                    <div class="form-group">
+                        <label>Record ID</label>
+                        <input type="text" id="editCatfishDisplayId" readonly style="background-color: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Hatchlings</label>
+                        <input type="number" id="editCatfishExpectedHatchlings" readonly style="background-color: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label for="editCatfishActualHatching">Actual Hatching % <span style="color: #d32f2f;">*</span></label>
+                        <input type="number" id="editCatfishActualHatching" name="actualHatching" step="0.1" min="0" max="100" required placeholder="Enter actual hatching percentage (0-100)" oninput="validateAndCalculateCatfish()">
+                        <small style="color: #666;">Maximum: 100%</small>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: var(--garden-green-dark);">Estimated Hatchlings (Auto-calculated)</label>
+                        <input type="number" id="editCatfishEstimatedHatchlings" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('editCatfishModal')">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="btn btn-primary" onclick="updateCatfishRecord()" style="background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);">
+                    <i class="fas fa-save"></i> Update Record
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Tilapia Modal -->
+    <div class="modal" id="editTilapiaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Update Tilapia Record</h3>
+                <button class="modal-close" onclick="closeModal('editTilapiaModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editTilapiaForm">
+                    <input type="hidden" id="editTilapiaRecordId">
+                    <div class="form-group">
+                        <label>Record ID</label>
+                        <input type="text" id="editTilapiaDisplayId" readonly style="background-color: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>Frys Harvested</label>
+                        <input type="number" id="editTilapiaFrysHarvested" readonly style="background-color: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Hatchlings</label>
+                        <input type="number" id="editTilapiaExpectedHatchlings" readonly style="background-color: #f5f5f5;">
+                    </div>
+                    <div class="form-group">
+                        <label for="editTilapiaHatchingPercentage">Hatching Percentage % <span style="color: #d32f2f;">*</span></label>
+                        <input type="number" id="editTilapiaHatchingPercentage" name="hatchingPercentage" step="0.1" min="0" max="100" required placeholder="Enter hatching percentage (0-100)" oninput="validateAndCalculateTilapia()">
+                        <small style="color: #666;">Maximum: 100%</small>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: var(--garden-green-dark);">Total Production (Auto-calculated)</label>
+                        <input type="number" id="editTilapiaTotalProduction" readonly style="background-color: #f1f8e9; border-color: var(--garden-green);">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('editTilapiaModal')">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="btn btn-primary" onclick="updateTilapiaRecord()" style="background: linear-gradient(135deg, var(--garden-green) 0%, var(--garden-green-dark) 100%);">
+                    <i class="fas fa-save"></i> Update Record
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle" style="color: #d32f2f;"></i> Confirm Delete</h3>
+                <button class="modal-close" onclick="closeModal('deleteConfirmModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; font-size: 1.1rem;">Are you sure you want to delete record <strong id="deleteRecordIdDisplay"></strong>?</p>
+                <p style="text-align: center; color: #d32f2f; margin-top: 1rem;">This action cannot be undone.</p>
+                <input type="hidden" id="deleteRecordId">
+                <input type="hidden" id="deleteRecordType">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('deleteConfirmModal')">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button class="btn btn-danger" onclick="confirmDelete()">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
@@ -1655,12 +2169,16 @@
         // Google Apps Script Web App URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu-td1NSfmdjg9voY4qU8tIXx-rwqZS0ltQS7wFh-we6AYluLMIwROWTpgmR7L0jSyFA/exec';
 
+        // Store records data
+        let catfishRecords = [];
+        let tilapiaRecords = [];
+
         // Inactivity timer variables
         let inactivityTimer;
         let lastActivityTime = Date.now();
         const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
 
-        // Function to reset inactivity timer
+        // Reset inactivity timer
         function resetInactivityTimer() {
             lastActivityTime = Date.now();
             clearTimeout(inactivityTimer);
@@ -1673,7 +2191,7 @@
             }
         }
 
-        // Function to logout
+        // Logout function
         function logout() {
             sessionStorage.removeItem('isLoggedIn');
             sessionStorage.removeItem('username');
@@ -1689,7 +2207,7 @@
             toggleIcon.classList.add('fa-eye');
         }
 
-        // Function to show welcome message
+        // Show welcome message
         function showWelcomeMessage(username) {
             const welcomeMessage = document.getElementById('welcomeMessage');
             const welcomeText = document.getElementById('welcomeText');
@@ -1702,12 +2220,12 @@
             }, 4000);
         }
 
-        // Add activity listeners
+        // Activity listeners
         ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'].forEach(event => {
             document.addEventListener(event, resetInactivityTimer, true);
         });
 
-        // Function to save credentials
+        // Save credentials
         function saveCredentials(username, password, remember) {
             if (remember) {
                 localStorage.setItem('savedUsername', username);
@@ -1720,7 +2238,7 @@
             }
         }
 
-        // Function to load saved credentials
+        // Load saved credentials
         function loadSavedCredentials() {
             const rememberMe = localStorage.getItem('rememberMe') === 'true';
             if (rememberMe) {
@@ -1735,7 +2253,7 @@
             }
         }
 
-        // Function to authenticate user
+        // Authenticate user
         async function authenticateUser(username, password) {
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL + '?action=login', {
@@ -1768,7 +2286,7 @@
             }
         }
 
-        // Function to send data to Google Sheets
+        // Save to Google Sheets
         async function saveToGoogleSheets(dataType, formData) {
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -1790,7 +2308,7 @@
             }
         }
 
-        // Toast notification function
+        // Toast notification
         function showToast(message, type = 'info') {
             const existingToast = document.querySelector('.toast');
             if (existingToast) {
@@ -1818,32 +2336,602 @@
             }, 5000);
         }
 
-        // Function to calculate catfish values
-        function calculateCatfishValues() {
+        // Calculate catfish expected hatchlings (for add form)
+        function calculateCatfishExpected() {
             const eggs = parseFloat(document.getElementById('catfishEggs').value) || 0;
-            const hatchingPercent = parseFloat(document.getElementById('catfishActualHatching').value) || 0;
-            
             const expectedHatchlings = eggs * 70;
             document.getElementById('catfishExpectedHatchlings').value = expectedHatchlings.toFixed(0);
-            
-            const estimatedHatchlings = (hatchingPercent / 100) * expectedHatchlings;
-            document.getElementById('catfishEstimatedHatchlings').value = estimatedHatchlings.toFixed(0);
         }
 
-        // Function to calculate tilapia values
-        function calculateTilapiaValues() {
+        // Calculate tilapia expected values (for add form)
+        function calculateTilapiaExpected() {
             const frysGrams = parseFloat(document.getElementById('tilapiaFrysHarvestedGrams').value) || 0;
             const eggs = parseFloat(document.getElementById('tilapiaEggs').value) || 0;
-            const hatchingPercent = parseFloat(document.getElementById('tilapiaActualHatching').value) || 0;
             
             const frysCount = frysGrams * 20;
             document.getElementById('tilapiaFrysHarvestedCount').value = frysCount.toFixed(0);
             
             const expectedHatchlings = eggs * 50;
             document.getElementById('tilapiaExpectedHatchlings').value = expectedHatchlings.toFixed(0);
+        }
+
+        // Validate and calculate for edit catfish modal
+        function validateAndCalculateCatfish() {
+            let actualHatching = parseFloat(document.getElementById('editCatfishActualHatching').value) || 0;
             
-            const totalProduction = (0.9 * frysCount) + ((hatchingPercent / 100) * expectedHatchlings);
-            document.getElementById('tilapiaTotalProduction').value = totalProduction.toFixed(0);
+            // Cap at 100
+            if (actualHatching > 100) {
+                actualHatching = 100;
+                document.getElementById('editCatfishActualHatching').value = 100;
+            }
+            if (actualHatching < 0) {
+                actualHatching = 0;
+                document.getElementById('editCatfishActualHatching').value = 0;
+            }
+            
+            const expectedHatchlings = parseFloat(document.getElementById('editCatfishExpectedHatchlings').value) || 0;
+            const estimatedHatchlings = (actualHatching / 100) * expectedHatchlings;
+            document.getElementById('editCatfishEstimatedHatchlings').value = estimatedHatchlings.toFixed(0);
+        }
+
+        // Validate and calculate for edit tilapia modal
+        function validateAndCalculateTilapia() {
+            let hatchingPercentage = parseFloat(document.getElementById('editTilapiaHatchingPercentage').value) || 0;
+            
+            // Cap at 100
+            if (hatchingPercentage > 100) {
+                hatchingPercentage = 100;
+                document.getElementById('editTilapiaHatchingPercentage').value = 100;
+            }
+            if (hatchingPercentage < 0) {
+                hatchingPercentage = 0;
+                document.getElementById('editTilapiaHatchingPercentage').value = 0;
+            }
+            
+            const frysHarvested = parseFloat(document.getElementById('editTilapiaFrysHarvested').value) || 0;
+            const expectedHatchlings = parseFloat(document.getElementById('editTilapiaExpectedHatchlings').value) || 0;
+            
+            // Total Production = (90% of FRYS HARVESTED) + (HATCHING PERCENTAGE * EXPECTED HATCHLINGS)
+            const totalProduction = (0.9 * frysHarvested) + ((hatchingPercentage / 100) * expectedHatchlings);
+            document.getElementById('editTilapiaTotalProduction').value = totalProduction.toFixed(0);
+        }
+
+        // Format date for display (no word wrap)
+        function formatDate(dateValue) {
+            if (!dateValue) return '-';
+            try {
+                const date = new Date(dateValue);
+                if (isNaN(date.getTime())) return dateValue;
+                return date.toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                }).replace(/ /g, '-');
+            } catch (e) {
+                return dateValue;
+            }
+        }
+
+        // Load catfish records
+        async function loadCatfishRecords() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=get_catfish_records');
+                const text = await response.text();
+                const result = JSON.parse(text);
+                
+                if (result.status === 'success') {
+                    catfishRecords = result.data || [];
+                    renderCatfishTable(catfishRecords);
+                } else {
+                    showToast('Error loading records: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error loading catfish records:', error);
+                showToast('Error loading records', 'error');
+            }
+            
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Load tilapia records
+        async function loadTilapiaRecords() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=get_tilapia_records');
+                const text = await response.text();
+                const result = JSON.parse(text);
+                
+                if (result.status === 'success') {
+                    tilapiaRecords = result.data || [];
+                    renderTilapiaTable(tilapiaRecords);
+                } else {
+                    showToast('Error loading records: ' + result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error loading tilapia records:', error);
+                showToast('Error loading records', 'error');
+            }
+            
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Render catfish table - Using correct column names
+        function renderCatfishTable(records) {
+            const tbody = document.getElementById('catfishTableBody');
+            const noRecords = document.getElementById('catfishNoRecords');
+            
+            if (!records || records.length === 0) {
+                tbody.innerHTML = '';
+                noRecords.style.display = 'block';
+                document.getElementById('catfishTable').style.display = 'none';
+                return;
+            }
+            
+            noRecords.style.display = 'none';
+            document.getElementById('catfishTable').style.display = 'table';
+            
+            tbody.innerHTML = records.map(record => {
+                const recordId = record['RECORD ID'] || '';
+                const inductionDate = formatDate(record['INDUCTION DATE']);
+                const broodingFemales = record['BROODING FEMALES'] || 0;
+                const strippingDate = formatDate(record['STRIPPING DATE']);
+                const sacrificedMales = record['SACRIFICED MALES'] || 0;
+                const eggs = record['EGGS (g)'] || 0;
+                const expectedHatchlings = record['EXPECTED HATCHLINGS'] || 0;
+                const actualHatching = record['ACTUAL HATCHING %'];
+                const estimatedHatchlings = record['ESTIMATED HATCHLINGS'];
+                
+                const isComplete = actualHatching !== '' && actualHatching !== null && actualHatching !== undefined && !isNaN(actualHatching);
+                const statusHtml = isComplete 
+                    ? '<span class="status-complete">Complete</span>' 
+                    : '<span class="status-pending">Pending</span>';
+                
+                return `
+                    <tr>
+                        <td><strong>${recordId}</strong></td>
+                        <td class="date-cell">${inductionDate}</td>
+                        <td>${broodingFemales}</td>
+                        <td class="date-cell">${strippingDate}</td>
+                        <td>${sacrificedMales}</td>
+                        <td>${eggs}</td>
+                        <td>${Math.round(expectedHatchlings)}</td>
+                        <td>${isComplete ? actualHatching + '%' : '-'}</td>
+                        <td>${isComplete ? Math.round(estimatedHatchlings) : '-'}</td>
+                        <td>${statusHtml}</td>
+                        <td class="actions">
+                            <button class="btn-edit" onclick="openEditCatfish('${recordId}', ${expectedHatchlings}, ${actualHatching || 0})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn-delete" onclick="openDeleteConfirm('${recordId}', 'catfish')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Render tilapia table - Using correct column names
+        function renderTilapiaTable(records) {
+            const tbody = document.getElementById('tilapiaTableBody');
+            const noRecords = document.getElementById('tilapiaNoRecords');
+            
+            if (!records || records.length === 0) {
+                tbody.innerHTML = '';
+                noRecords.style.display = 'block';
+                document.getElementById('tilapiaTable').style.display = 'none';
+                return;
+            }
+            
+            noRecords.style.display = 'none';
+            document.getElementById('tilapiaTable').style.display = 'table';
+            
+            tbody.innerHTML = records.map(record => {
+                const recordId = record['RECORD ID'] || '';
+                const date = formatDate(record['DATE']);
+                const tankNumber = record['TANK NUMBER'] || '';
+                const broodingFemales = record['BROODING FEMALES'] || 0;
+                const frysHarvested = record['FRYS HARVESTED'] || 0;
+                const eggs = record['EGGS (g)'] || 0;
+                const expectedHatchlings = record['EXPECTED HATCHLINGS'] || 0;
+                const hatchingPercentage = record['HATCHING PERCENTAGE'];
+                const totalProduction = record['TOTAL PRODUCTION'];
+                
+                const isComplete = hatchingPercentage !== '' && hatchingPercentage !== null && hatchingPercentage !== undefined && !isNaN(hatchingPercentage);
+                const statusHtml = isComplete 
+                    ? '<span class="status-complete">Complete</span>' 
+                    : '<span class="status-pending">Pending</span>';
+                
+                return `
+                    <tr>
+                        <td><strong>${recordId}</strong></td>
+                        <td class="date-cell">${date}</td>
+                        <td>${tankNumber}</td>
+                        <td>${broodingFemales}</td>
+                        <td>${Math.round(frysHarvested)}</td>
+                        <td>${eggs}</td>
+                        <td>${Math.round(expectedHatchlings)}</td>
+                        <td>${isComplete ? hatchingPercentage + '%' : '-'}</td>
+                        <td>${isComplete ? Math.round(totalProduction) : '-'}</td>
+                        <td>${statusHtml}</td>
+                        <td class="actions">
+                            <button class="btn-edit" onclick="openEditTilapia('${recordId}', ${frysHarvested}, ${expectedHatchlings}, ${hatchingPercentage || 0})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn-delete" onclick="openDeleteConfirm('${recordId}', 'tilapia')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Search records
+        function searchRecords(type) {
+            const searchInput = document.getElementById(type + 'Search').value.trim().toUpperCase();
+            const records = type === 'catfish' ? catfishRecords : tilapiaRecords;
+            
+            if (!searchInput) {
+                if (type === 'catfish') {
+                    renderCatfishTable(catfishRecords);
+                } else {
+                    renderTilapiaTable(tilapiaRecords);
+                }
+                return;
+            }
+            
+            const filteredRecords = records.filter(record => {
+                const recordId = (record['RECORD ID'] || '').toString().toUpperCase();
+                return recordId.includes(searchInput);
+            });
+            
+            if (type === 'catfish') {
+                renderCatfishTable(filteredRecords);
+            } else {
+                renderTilapiaTable(filteredRecords);
+            }
+        }
+
+        // Open edit catfish modal
+        function openEditCatfish(recordId, expectedHatchlings, currentActualHatching) {
+            document.getElementById('editCatfishRecordId').value = recordId;
+            document.getElementById('editCatfishDisplayId').value = recordId;
+            document.getElementById('editCatfishExpectedHatchlings').value = expectedHatchlings;
+            document.getElementById('editCatfishActualHatching').value = currentActualHatching || '';
+            validateAndCalculateCatfish();
+            document.getElementById('editCatfishModal').classList.add('active');
+        }
+
+        // Open edit tilapia modal
+        function openEditTilapia(recordId, frysHarvested, expectedHatchlings, currentHatchingPercentage) {
+            document.getElementById('editTilapiaRecordId').value = recordId;
+            document.getElementById('editTilapiaDisplayId').value = recordId;
+            document.getElementById('editTilapiaFrysHarvested').value = frysHarvested;
+            document.getElementById('editTilapiaExpectedHatchlings').value = expectedHatchlings;
+            document.getElementById('editTilapiaHatchingPercentage').value = currentHatchingPercentage || '';
+            validateAndCalculateTilapia();
+            document.getElementById('editTilapiaModal').classList.add('active');
+        }
+
+        // Open delete confirmation
+        function openDeleteConfirm(recordId, type) {
+            document.getElementById('deleteRecordId').value = recordId;
+            document.getElementById('deleteRecordType').value = type;
+            document.getElementById('deleteRecordIdDisplay').textContent = recordId;
+            document.getElementById('deleteConfirmModal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Update catfish record
+        async function updateCatfishRecord() {
+            const recordId = document.getElementById('editCatfishRecordId').value;
+            let actualHatching = parseFloat(document.getElementById('editCatfishActualHatching').value);
+            
+            if (isNaN(actualHatching)) {
+                showToast('Please enter the actual hatching percentage', 'error');
+                return;
+            }
+            
+            // Cap at 100
+            if (actualHatching > 100) actualHatching = 100;
+            if (actualHatching < 0) actualHatching = 0;
+            
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify({
+                        type: 'update_catfish',
+                        recordId: recordId,
+                        actualHatching: actualHatching
+                    })
+                });
+                
+                showToast('Record updated successfully!', 'success');
+                closeModal('editCatfishModal');
+                
+                setTimeout(() => {
+                    loadCatfishRecords();
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error updating record:', error);
+                showToast('Error updating record', 'error');
+            }
+            
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Update tilapia record
+        async function updateTilapiaRecord() {
+            const recordId = document.getElementById('editTilapiaRecordId').value;
+            let hatchingPercentage = parseFloat(document.getElementById('editTilapiaHatchingPercentage').value);
+            
+            if (isNaN(hatchingPercentage)) {
+                showToast('Please enter the hatching percentage', 'error');
+                return;
+            }
+            
+            // Cap at 100
+            if (hatchingPercentage > 100) hatchingPercentage = 100;
+            if (hatchingPercentage < 0) hatchingPercentage = 0;
+            
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify({
+                        type: 'update_tilapia',
+                        recordId: recordId,
+                        actualHatching: hatchingPercentage
+                    })
+                });
+                
+                showToast('Record updated successfully!', 'success');
+                closeModal('editTilapiaModal');
+                
+                setTimeout(() => {
+                    loadTilapiaRecords();
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error updating record:', error);
+                showToast('Error updating record', 'error');
+            }
+            
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Confirm delete
+        async function confirmDelete() {
+            const recordId = document.getElementById('deleteRecordId').value;
+            const type = document.getElementById('deleteRecordType').value;
+            
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify({
+                        type: type === 'catfish' ? 'delete_catfish' : 'delete_tilapia',
+                        recordId: recordId
+                    })
+                });
+                
+                showToast('Record deleted successfully!', 'success');
+                closeModal('deleteConfirmModal');
+                
+                setTimeout(() => {
+                    if (type === 'catfish') {
+                        loadCatfishRecords();
+                    } else {
+                        loadTilapiaRecords();
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error deleting record:', error);
+                showToast('Error deleting record', 'error');
+            }
+            
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Open production options
+        function openProductionOptions(type) {
+            const dashboardSection = document.getElementById('dashboardSection');
+            const subCategorySections = document.querySelectorAll('.sub-category-section');
+            const formSections = document.querySelectorAll('.form-section');
+            const recordsSections = document.querySelectorAll('.records-section');
+            
+            dashboardSection.style.display = 'none';
+            subCategorySections.forEach(section => section.style.display = 'none');
+            formSections.forEach(section => section.style.display = 'none');
+            recordsSections.forEach(section => section.style.display = 'none');
+            
+            document.getElementById(type + '-options').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Open records section
+        function openRecords(type) {
+            const dashboardSection = document.getElementById('dashboardSection');
+            const subCategorySections = document.querySelectorAll('.sub-category-section');
+            const formSections = document.querySelectorAll('.form-section');
+            const recordsSections = document.querySelectorAll('.records-section');
+            
+            dashboardSection.style.display = 'none';
+            subCategorySections.forEach(section => section.style.display = 'none');
+            formSections.forEach(section => section.style.display = 'none');
+            recordsSections.forEach(section => section.style.display = 'none');
+            
+            document.getElementById(type + '-records').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (type === 'catfish') {
+                loadCatfishRecords();
+            } else {
+                loadTilapiaRecords();
+            }
+        }
+
+        // Open form
+        function openForm(formType) {
+            const dashboardSection = document.getElementById('dashboardSection');
+            const subCategorySections = document.querySelectorAll('.sub-category-section');
+            const formSections = document.querySelectorAll('.form-section');
+            const recordsSections = document.querySelectorAll('.records-section');
+            
+            dashboardSection.style.display = 'none';
+            subCategorySections.forEach(section => section.style.display = 'none');
+            formSections.forEach(section => section.style.display = 'none');
+            recordsSections.forEach(section => section.style.display = 'none');
+            
+            const targetForm = document.getElementById(formType + '-form');
+            if (targetForm) {
+                targetForm.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Show section
+        function showSection(sectionId) {
+            const dashboardSection = document.getElementById('dashboardSection');
+            const subCategorySections = document.querySelectorAll('.sub-category-section');
+            const formSections = document.querySelectorAll('.form-section');
+            const recordsSections = document.querySelectorAll('.records-section');
+            
+            dashboardSection.style.display = 'none';
+            subCategorySections.forEach(section => section.style.display = 'none');
+            formSections.forEach(section => section.style.display = 'none');
+            recordsSections.forEach(section => section.style.display = 'none');
+            
+            if (sectionId === 'dashboardSection') {
+                dashboardSection.style.display = 'block';
+            } else {
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Submit form
+        async function submitForm(event, formType) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+                
+                if (input.name === 'ph') {
+                    const phValue = parseFloat(input.value);
+                    if (isNaN(phValue) || phValue < 1 || phValue > 14) {
+                        input.classList.add('error');
+                        isValid = false;
+                    }
+                }
+            });
+            
+            if (!isValid) {
+                showToast('Please fill in all required fields correctly.', 'error');
+                return;
+            }
+            
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+            
+            let dataType;
+            if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
+                dataType = 'water_quality';
+                data.habitat = formType.charAt(0).toUpperCase() + formType.slice(1);
+                if (formType === 'raiseTank') data.habitat = 'Raise Tank';
+                if (formType === 'blueTank') data.habitat = 'Blue Tank';
+                if (formType === 'growOuts') data.habitat = 'Grow-outs';
+            } else if (formType === 'catfish') {
+                dataType = 'production_catfish';
+            } else if (formType === 'tilapia') {
+                dataType = 'production_tilapia';
+            }
+            
+            const result = await saveToGoogleSheets(dataType, data);
+            
+            loadingOverlay.classList.remove('active');
+            
+            if (result.success) {
+                showToast('Data saved successfully!', 'success');
+                form.reset();
+                
+                const today = new Date().toISOString().split('T')[0];
+                form.querySelectorAll('input[type="date"]').forEach(input => {
+                    input.value = today;
+                });
+                
+                // Reset calculated fields
+                if (formType === 'catfish') {
+                    document.getElementById('catfishExpectedHatchlings').value = '';
+                } else if (formType === 'tilapia') {
+                    document.getElementById('tilapiaFrysHarvestedCount').value = '';
+                    document.getElementById('tilapiaExpectedHatchlings').value = '';
+                }
+                
+                let targetSection;
+                if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
+                    targetSection = 'water-subcategory';
+                } else if (formType === 'catfish') {
+                    targetSection = 'catfish-options';
+                } else if (formType === 'tilapia') {
+                    targetSection = 'tilapia-options';
+                }
+                
+                setTimeout(() => {
+                    showSection(targetSection);
+                }, 1000);
+            } else {
+                showToast('Error saving data. Please try again.', 'error');
+            }
         }
 
         // Main application logic
@@ -1963,164 +3051,49 @@
 
             // Category card selection
             const categoryCards = document.querySelectorAll('.category-card');
-            const subCategorySections = document.querySelectorAll('.sub-category-section');
-            const formSections = document.querySelectorAll('.form-section');
-            const dashboardSection = document.getElementById('dashboardSection');
             
             categoryCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const categoryType = this.getAttribute('data-category');
-                    const targetSection = document.getElementById(`${categoryType}-subcategory`);
-                    
-                    dashboardSection.style.display = 'none';
-                    
-                    subCategorySections.forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    
-                    formSections.forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    
-                    if (targetSection) {
-                        targetSection.style.display = 'block';
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
+                    showSection(categoryType + '-subcategory');
                 });
             });
-
-            // Form opening function
-            window.openForm = function(formType) {
-                const targetForm = document.getElementById(`${formType}-form`);
-                
-                dashboardSection.style.display = 'none';
-                subCategorySections.forEach(section => {
-                    section.style.display = 'none';
-                });
-                formSections.forEach(section => {
-                    section.style.display = 'none';
-                });
-                
-                if (targetForm) {
-                    targetForm.style.display = 'block';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            };
-
-            // Show section function
-            window.showSection = function(sectionId) {
-                dashboardSection.style.display = 'none';
-                subCategorySections.forEach(section => {
-                    section.style.display = 'none';
-                });
-                formSections.forEach(section => {
-                    section.style.display = 'none';
-                });
-                
-                if (sectionId === 'dashboardSection') {
-                    dashboardSection.style.display = 'block';
-                } else {
-                    const targetSection = document.getElementById(sectionId);
-                    if (targetSection) {
-                        targetSection.style.display = 'block';
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }
-            };
-
-            // Form submission handler
-            window.submitForm = async function(event, formType) {
-                event.preventDefault();
-                
-                const form = event.target;
-                const inputs = form.querySelectorAll('input[required]');
-                let isValid = true;
-                
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.classList.add('error');
-                        isValid = false;
-                    } else {
-                        input.classList.remove('error');
-                    }
-                    
-                    if (input.name === 'ph') {
-                        const phValue = parseFloat(input.value);
-                        if (isNaN(phValue) || phValue < 1 || phValue > 14) {
-                            input.classList.add('error');
-                            isValid = false;
-                        }
-                    }
-                    
-                    if (input.name === 'actualHatching') {
-                        const percentValue = parseFloat(input.value);
-                        if (isNaN(percentValue) || percentValue < 0 || percentValue > 100) {
-                            input.classList.add('error');
-                            isValid = false;
-                        }
-                    }
-                });
-                
-                if (!isValid) {
-                    showToast('Please fill in all required fields correctly.', 'error');
-                    return;
-                }
-                
-                const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
-                
-                const loadingOverlay = document.getElementById('loadingOverlay');
-                loadingOverlay.classList.add('active');
-                
-                let dataType;
-                if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
-                    dataType = 'water_quality';
-                    data.habitat = formType.charAt(0).toUpperCase() + formType.slice(1);
-                    if (formType === 'raiseTank') data.habitat = 'Raise Tank';
-                    if (formType === 'blueTank') data.habitat = 'Blue Tank';
-                    if (formType === 'growOuts') data.habitat = 'Grow-outs';
-                } else if (formType === 'catfish') {
-                    dataType = 'production_catfish';
-                } else if (formType === 'tilapia') {
-                    dataType = 'production_tilapia';
-                }
-                
-                const result = await saveToGoogleSheets(dataType, data);
-                
-                loadingOverlay.classList.remove('active');
-                
-                if (result.success) {
-                    showToast('Data saved successfully!', 'success');
-                    
-                    form.reset();
-                    
-                    const today = new Date().toISOString().split('T')[0];
-                    form.querySelectorAll('input[type="date"]').forEach(input => {
-                        input.value = today;
-                    });
-                    
-                    let targetSection;
-                    if (['hatchery', 'raiseTank', 'blueTank', 'growOuts'].includes(formType)) {
-                        targetSection = 'water-subcategory';
-                    } else if (['catfish', 'tilapia'].includes(formType)) {
-                        targetSection = 'production-subcategory';
-                    }
-                    
-                    setTimeout(() => {
-                        showSection(targetSection);
-                    }, 1000);
-                } else {
-                    showToast('Error saving data. Please try again.', 'error');
-                }
-            };
 
             // Set today's date as default
             const today = new Date().toISOString().split('T')[0];
             document.querySelectorAll('input[type="date"]').forEach(input => {
                 input.value = today;
+            });
+
+            // Search on Enter key
+            document.getElementById('catfishSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchRecords('catfish');
+                }
+            });
+
+            document.getElementById('tilapiaSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchRecords('tilapia');
+                }
+            });
+
+            // Close modal when clicking outside
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                }
             });
         });
     </script>
